@@ -14,18 +14,24 @@ grails.project.dependency.resolution = {
         grailsHome()
         grailsCentral()
 
-        // uncomment the below to enable remote dependency resolution
-        // from public Maven repositories
         //mavenLocal()
-        //mavenCentral()
-        //mavenRepo "http://snapshots.repository.codehaus.org"
-        //mavenRepo "http://repository.codehaus.org"
-        //mavenRepo "http://download.java.net/maven/2/"
-        //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenCentral()
+        mavenRepo "http://repo.grails.org/grails/libs-releases/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
+        compile "joda-time:joda-time:1.4"
+        def datastoreVersion = "1.0.0.RC1"
+        compile("org.grails:grails-datastore-gorm-plugin-support:$datastoreVersion",
+                "org.grails:grails-datastore-gorm:$datastoreVersion",
+                "org.grails:grails-datastore-core:$datastoreVersion",
+                "org.grails:grails-datastore-simple:$datastoreVersion") {
+            transitive = false
+        }
+        test("org.grails:grails-datastore-gorm-test:$datastoreVersion") {
+            transitive = false
+        }
     }
 }
